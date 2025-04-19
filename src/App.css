@@ -1,0 +1,53 @@
+.app {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.subject-input {
+  margin-bottom: 15px;
+}
+
+.subject-input select {
+  margin-left: 10px;
+  padding: 5px;
+  width: 100px;
+}
+
+.toggle-cgpa {
+  margin: 15px 0;
+}
+
+.prev-gpa-input input {
+  margin-left: 10px;
+  padding: 5px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+.result {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.2em;
+  color: #333;
+}
