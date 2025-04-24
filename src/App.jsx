@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./app.css";
+import "./App.css";
 
 const App = () => {
   const [grades, setGrades] = useState({});
@@ -115,11 +115,11 @@ const App = () => {
 
         <div className="toggle-cgpa">
           <label>
-            <input
-              type="checkbox"
-              checked={showCGPAInput}
-              onChange={() => setShowCGPAInput(!showCGPAInput)}
-            />
+          <input
+            type="checkbox"
+            checked={showCGPAInput}
+            onChange={() => setShowCGPAInput(!showCGPAInput)}
+          />
             Include Previous Semester GPA
           </label>
         </div>
