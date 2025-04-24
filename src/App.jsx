@@ -6,15 +6,27 @@ const App = () => {
   const [prevSemGPA, setPrevSemGPA] = useState("");
   const [showCGPAInput, setShowCGPAInput] = useState(false);
   const [result, setResult] = useState(null);
+  const [selectedSemester, setSelectedSemester] = useState("1");
 
-  const subjects = [
-    { name: "EC - Digital Design & Electric Circuits", credits: 5 },
-    { name: "CO - Computer Organization", credits: 4 },
-    { name: "DS - Data Structures I", credits: 5 },
-    { name: "MA - Calculus & Linear Algebra", credits: 4 },
-    { name: "IT - IT Workshop 2", credits: 4 },
-    { name: "PD - Personality Development", credits: 1 },
-  ];
+  const semesterSubjects = {
+    "1": [
+      { name: "EC - Electronic Circuits", credits: 5 },
+      { name: "CP - Computer Programming", credits: 5 },
+      { name: "IT - IT Workshop I", credits: 5 },
+      { name: "MA - Discrete Mathematics", credits: 4 },
+      { name: "CM - Communication Skills", credits: 3 },
+      { name: "FL - Foreign Language - German", credits: 1 },
+    ],
+    "2": [
+      { name: "EC - Digital Design & Electric Circuits", credits: 5 },
+      { name: "CO - Computer Organization", credits: 4 },
+      { name: "DS - Data Structures I", credits: 5 },
+      { name: "MA - Calculus & Linear Algebra", credits: 4 },
+      { name: "IT - IT Workshop 2", credits: 4 },
+      { name: "PD - Personality Development", credits: 1 },
+    ]
+    // Add more semesters as needed
+  };
 
   const gradeValues = {
     "A": 10,
@@ -33,8 +45,9 @@ const App = () => {
   const calculateSGPA = () => {
     let totalCredits = 0;
     let weightedSum = 0;
+    const currentSubjects = semesterSubjects[selectedSemester];
 
-    subjects.forEach((sub) => {
+    currentSubjects.forEach((sub) => {
       if (grades[sub.name]) {
         weightedSum += gradeValues[grades[sub.name]] * sub.credits;
         totalCredits += sub.credits;
@@ -55,11 +68,33 @@ const App = () => {
     setResult(showCGPAInput ? calculateCGPA() : calculateSGPA());
   };
 
+  const handleSemesterChange = (e) => {
+    setSelectedSemester(e.target.value);
+    // Reset grades when semester changes
+    setGrades({});
+    setResult(null);
+  };
+
   return (
     <div className="app">
       <h1>CGPA Calculator</h1>
       <form onSubmit={handleSubmit}>
-        {subjects.map((sub) => (
+        <div className="semester-selector">
+          <label>
+            Select Semester:
+            <select 
+              value={selectedSemester} 
+              onChange={handleSemesterChange}
+              required
+            >
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              {/* Add more semesters as needed */}
+            </select>
+          </label>
+        </div>
+
+        {semesterSubjects[selectedSemester].map((sub) => (
           <div key={sub.name} className="subject-input">
             <label>
               {sub.name} ({sub.credits} credits):
